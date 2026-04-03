@@ -49,9 +49,9 @@ pytest = "testwise.parsers.pytest_parser:PytestParser"
 generic = "testwise.parsers.generic_parser:GenericParser"
 
 [project.urls]
-Homepage = "https://github.com/mfrautnick/testwise"
-Repository = "https://github.com/mfrautnick/testwise"
-Issues = "https://github.com/mfrautnick/testwise/issues"
+Homepage = "https://github.com/mattfrautnick/testwise"
+Repository = "https://github.com/mattfrautnick/testwise"
+Issues = "https://github.com/mattfrautnick/testwise/issues"
 
 [tool.ruff]
 line-length = 100

@@ -6,10 +6,10 @@
     <em>Run only the tests that matter. Save CI time without sacrificing coverage.</em>
   </p>
   <p align="center">
-    <a href="https://github.com/mfrautnick/testwise/actions/workflows/ci.yml"><img src="https://github.com/mfrautnick/testwise/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+    <a href="https://github.com/mattfrautnick/testwise/actions/workflows/ci.yml"><img src="https://github.com/mattfrautnick/testwise/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
     <a href="https://pypi.org/project/testwise/"><img src="https://img.shields.io/pypi/v/testwise.svg" alt="PyPI"></a>
     <a href="https://pypi.org/project/testwise/"><img src="https://img.shields.io/pypi/pyversions/testwise.svg" alt="Python"></a>
-    <a href="https://github.com/mfrautnick/testwise/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mfrautnick/testwise" alt="License"></a>
+    <a href="https://github.com/mattfrautnick/testwise/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mattfrautnick/testwise" alt="License"></a>
   </p>
 </p>
 
@@ -91,7 +91,7 @@ jobs:
         with:
           fetch-depth: 0  # Full history needed for diff
 
-      - uses: mfrautnick/testwise@v1
+      - uses: mattfrautnick/testwise@v1
         with:
           api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           run-level: should_run
@@ -216,7 +216,7 @@ Testwise is in early development. Here's what's planned:
 - [ ] Test impact analysis — learn from historical runs which tests fail for which changes
 - [ ] GitLab CI integration
 
-Have an idea? [Open an issue](https://github.com/mfrautnick/testwise/issues) or [start a discussion](https://github.com/mfrautnick/testwise/discussions).
+Have an idea? [Open an issue](https://github.com/mattfrautnick/testwise/issues) or [start a discussion](https://github.com/mattfrautnick/testwise/discussions).
 
 ## Contributing
 
@@ -226,8 +226,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, architecture overv
 
 ## Community
 
-- [GitHub Issues](https://github.com/mfrautnick/testwise/issues) — Bug reports and feature requests
-- [GitHub Discussions](https://github.com/mfrautnick/testwise/discussions) — Questions, ideas, and show & tell
+- [GitHub Issues](https://github.com/mattfrautnick/testwise/issues) — Bug reports and feature requests
+- [GitHub Discussions](https://github.com/mattfrautnick/testwise/discussions) — Questions, ideas, and show & tell
 
 ## License
 

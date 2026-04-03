@@ -5,7 +5,7 @@ Thanks for your interest in contributing! Here's how to get started.
 ## Development Setup
 
 ```bash
-git clone https://github.com/mfrautnick/testwise.git
+git clone https://github.com/mattfrautnick/testwise.git
 cd testwise
 pip install -e ".[dev]"
 ```
