@@ -1,4 +1,4 @@
-name: "Testwise-AI"
+name: "TestwiseAI"
 description: "LLM-powered test selection — intelligently run only the tests that matter"
 branding:
   icon: "check-circle"
