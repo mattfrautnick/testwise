@@ -45,9 +45,7 @@ def select_tests(
                 break
 
     if not api_key:
-        raise LLMError(
-            f"No API key found. Set {config.api_key_env} environment variable."
-        )
+        raise LLMError(f"No API key found. Set {config.api_key_env} environment variable.")
 
     response_schema = LLMSelectionResponse.model_json_schema()
 
@@ -103,7 +101,7 @@ def _call_with_structured_output(
     messages: list[dict[str, str]],
     config: LLMConfig,
     api_key: str,
-    schema: dict,
+    schema: dict[str, object],
 ) -> LLMSelectionResponse:
     """Tier 1: Use litellm's response_format for structured output."""
     max_retries = 1
@@ -134,10 +132,10 @@ def _call_with_structured_output(
 
             return LLMSelectionResponse.model_validate_json(content)
 
-        except litellm.Timeout as e:
+        except litellm.Timeout as e:  # type: ignore[attr-defined]
             raise LLMTimeoutError(f"LLM timed out after {config.timeout_seconds}s") from e
 
-        except (litellm.RateLimitError, litellm.InternalServerError) as e:
+        except (litellm.RateLimitError, litellm.InternalServerError) as e:  # type: ignore[attr-defined]
             last_error = e
             if attempt < max_retries:
                 logger.warning("Retryable error (attempt %d): %s", attempt + 1, e)
@@ -145,7 +143,7 @@ def _call_with_structured_output(
                 continue
             raise LLMError(f"LLM error after retries: {e}") from e
 
-        except (litellm.AuthenticationError, litellm.BadRequestError) as e:
+        except (litellm.AuthenticationError, litellm.BadRequestError) as e:  # type: ignore[attr-defined]
             raise LLMError(f"LLM error: {e}") from e
 
         except Exception as e:
@@ -160,7 +158,7 @@ def _call_with_text_mode(
     messages: list[dict[str, str]],
     config: LLMConfig,
     api_key: str,
-    schema: dict,
+    schema: dict[str, object],
 ) -> LLMSelectionResponse:
     """Tier 2: Embed JSON schema in prompt and parse text response."""
     schema_instruction = (
@@ -173,10 +171,12 @@ def _call_with_text_mode(
     modified_messages = []
     for msg in messages:
         if msg["role"] == "system":
-            modified_messages.append({
-                "role": "system",
-                "content": msg["content"] + schema_instruction,
-            })
+            modified_messages.append(
+                {
+                    "role": "system",
+                    "content": msg["content"] + schema_instruction,
+                }
+            )
         else:
             modified_messages.append(msg)
 
@@ -198,7 +198,7 @@ def _call_with_text_mode(
 
     except (LLMParseError, LLMTimeoutError):
         raise
-    except litellm.Timeout as e:
+    except litellm.Timeout as e:  # type: ignore[attr-defined]
         raise LLMTimeoutError(f"LLM timed out after {config.timeout_seconds}s") from e
     except Exception as e:
         raise LLMError(f"LLM text mode failed: {e}") from e

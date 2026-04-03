@@ -21,16 +21,34 @@ from testwise.test_runner import run_selected_tests
 
 
 @click.command()
-@click.option("--config", "-c", "config_path", type=click.Path(exists=True, path_type=Path), help="Path to .testwise.yml")
+@click.option(
+    "--config",
+    "-c",
+    "config_path",
+    type=click.Path(exists=True, path_type=Path),
+    help="Path to .testwise.yml",
+)
 @click.option("--base-ref", "-b", help="Base git ref to diff against")
 @click.option("--head-ref", help="Head git ref (default: HEAD)")
-@click.option("--output", "-o", "output_format", type=click.Choice(["text", "json", "github"]), default="text", help="Output format")
+@click.option(
+    "--output",
+    "-o",
+    "output_format",
+    type=click.Choice(["text", "json", "github"]),
+    default="text",
+    help="Output format",
+)
 @click.option("--output-file", type=click.Path(path_type=Path), help="Write JSON report to file")
 @click.option("--dry-run", is_flag=True, help="Show selections without running tests")
 @click.option("--fallback", is_flag=True, help="Skip LLM, run all tests")
-@click.option("--run-level", type=click.Choice(["must_run", "should_run", "all"]), default="should_run", help="Minimum classification to execute")
+@click.option(
+    "--run-level",
+    type=click.Choice(["must_run", "should_run", "all"]),
+    default="should_run",
+    help="Minimum classification to execute",
+)
 @click.option("--verbose", "-v", is_flag=True, help="Verbose logging")
-@click.version_option(package_name="testwise")
+@click.version_option(package_name="testwise-ai")
 def main(
     config_path: Path | None,
     base_ref: str | None,
@@ -74,7 +92,9 @@ def main(
         # Truncate if needed
         diff = truncate_diff(diff, config.context.max_diff_lines)
 
-        click.echo(f"Changes: {len(diff.files)} files (+{diff.total_additions}/-{diff.total_deletions})")
+        click.echo(
+            f"Changes: {len(diff.files)} files (+{diff.total_additions}/-{diff.total_deletions})"
+        )
 
         # 4. Discover and parse test files
         test_files = discover_tests(repo_root, config.runners)
@@ -125,21 +145,18 @@ def main(
         min_classifications = {
             "must_run": {TestClassification.must_run},
             "should_run": {TestClassification.must_run, TestClassification.should_run},
-            "all": {TestClassification.must_run, TestClassification.should_run, TestClassification.skip},
+            "all": {
+                TestClassification.must_run,
+                TestClassification.should_run,
+                TestClassification.skip,
+            },
         }
         allowed = min_classifications[run_level]
 
-        active_selections = [
-            s for s in llm_response.selections if s.classification in allowed
-        ]
-        skipped_selections = [
-            s for s in llm_response.selections if s.classification not in allowed
-        ]
+        active_selections = [s for s in llm_response.selections if s.classification in allowed]
+        skipped_selections = [s for s in llm_response.selections if s.classification not in allowed]
 
-        click.echo(
-            f"Selected: {len(active_selections)} tests "
-            f"(skipping {len(skipped_selections)})"
-        )
+        click.echo(f"Selected: {len(active_selections)} tests (skipping {len(skipped_selections)})")
 
         # 7. Execute tests (unless dry run)
         results = []

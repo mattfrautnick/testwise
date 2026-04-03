@@ -11,7 +11,7 @@ import logging
 from abc import ABC, abstractmethod
 from pathlib import Path
 
-from testwise.models import ParsedTestFile, ParsedTest, RunnerConfig
+from testwise.models import ParsedTest, ParsedTestFile, RunnerConfig
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,10 @@ def load_parsers() -> dict[str, BaseParser]:
         return _parsers
 
     eps = importlib.metadata.entry_points()
-    parser_eps = eps.select(group="testwise.parsers") if hasattr(eps, "select") else eps.get("testwise.parsers", [])
+    if hasattr(eps, "select"):
+        parser_eps = eps.select(group="testwise.parsers")
+    else:
+        parser_eps = eps.get("testwise.parsers", [])  # type: ignore[arg-type]
 
     for ep in parser_eps:
         try:

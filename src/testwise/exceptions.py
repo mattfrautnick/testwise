@@ -29,5 +29,5 @@ class TestRunnerError(TestwiseError):
     """Test execution failure."""
 
 
-class ContextBudgetExceeded(TestwiseError):
+class ContextBudgetExceededError(TestwiseError):
     """Cannot fit required content within the token budget."""

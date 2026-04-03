@@ -208,12 +208,12 @@ def _get_changed_files(base_ref: str, head_ref: str, cwd: str | None) -> list[Di
 
         # Combine
         files = []
-        for path, (status, old_path) in status_map.items():
+        for path, (status, old_path) in status_map.items():  # type: ignore[assignment]
             additions, deletions = numstat_map.get(path, (0, 0))
             files.append(
                 DiffFile(
                     path=path,
-                    status=status,
+                    status=status,  # type: ignore[arg-type]
                     additions=additions,
                     deletions=deletions,
                     old_path=old_path,

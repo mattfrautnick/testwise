@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 from pathlib import Path
@@ -111,8 +110,8 @@ def _write_github_summary(report: RunReport) -> None:
     lines = [
         "## Testwise Results",
         "",
-        f"| Metric | Value |",
-        f"|--------|-------|",
+        "| Metric | Value |",
+        "|--------|-------|",
         f"| Model | `{report.llm_model_used}` |",
         f"| LLM Latency | {report.llm_latency_seconds:.1f}s |",
         f"| Tests Discovered | {report.total_tests_discovered} |",
@@ -136,9 +135,7 @@ def _write_github_summary(report: RunReport) -> None:
         lines.append("| Test | Classification | Reasoning |")
         lines.append("|------|----------------|-----------|")
         for sel in report.selections[:100]:
-            lines.append(
-                f"| `{sel.test_id}` | {sel.classification.value} | {sel.reasoning[:60]} |"
-            )
+            lines.append(f"| `{sel.test_id}` | {sel.classification.value} | {sel.reasoning[:60]} |")
         if len(report.selections) > 100:
             lines.append(f"| ... | {len(report.selections) - 100} more | |")
         lines.append("")
@@ -185,8 +182,11 @@ def _write_github_annotations(report: RunReport) -> None:
 
     if report.tests_selected > 0:
         print(
-            f"::notice::Testwise: {report.tests_selected}/{report.total_tests_discovered} "
-            f"tests selected, saved ~{_pct(report.tests_skipped, report.total_tests_discovered)} of test time"
+            f"::notice::Testwise: "
+            f"{report.tests_selected}/{report.total_tests_discovered} "
+            f"tests selected, saved "
+            f"~{_pct(report.tests_skipped, report.total_tests_discovered)}"
+            f" of test time"
         )
 
 

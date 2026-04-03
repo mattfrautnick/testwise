@@ -37,7 +37,7 @@ def find_config_file(repo_root: Path) -> Path | None:
 
 def load_config(
     config_path: Path | None = None,
-    overrides: dict | None = None,
+    overrides: dict[str, object] | None = None,
 ) -> TestwiseConfig:
     """Load configuration from file and environment variables.
 
@@ -47,7 +47,7 @@ def load_config(
     3. Auto-discover in repo root
     4. Defaults
     """
-    raw: dict = {}
+    raw: dict[str, object] = {}
 
     # Find config file
     if config_path is None:
@@ -86,7 +86,7 @@ def load_config(
         raise ConfigError(f"Invalid configuration: {e}") from e
 
 
-def _apply_env_overrides(raw: dict) -> None:
+def _apply_env_overrides(raw: dict[str, object]) -> None:
     """Apply TESTWISE_* environment variables as config overrides."""
     env_map = {
         "TESTWISE_LLM_MODEL": ("llm", "model"),
@@ -111,21 +111,25 @@ def _apply_env_overrides(raw: dict) -> None:
             value = value.lower() in ("true", "1", "yes")  # type: ignore[assignment]
 
         # Set in raw dict
-        target = raw
+        target: dict[str, object] = raw
         for key in path[:-1]:
-            target = target.setdefault(key, {})  # type: ignore[assignment]
-        target[path[-1]] = value  # type: ignore[index]
+            nested = target.setdefault(key, {})
+            assert isinstance(nested, dict)
+            target = nested
+        target[path[-1]] = value
 
     # API key env var name override
     api_key_env = os.environ.get("TESTWISE_API_KEY_ENV")
     if api_key_env:
-        raw.setdefault("llm", {})["api_key_env"] = api_key_env
+        llm = raw.setdefault("llm", {})
+        assert isinstance(llm, dict)
+        llm["api_key_env"] = api_key_env
 
 
-def _deep_merge(base: dict, override: dict) -> None:
+def _deep_merge(base: dict[str, object], override: dict[str, object]) -> None:
     """Merge override into base, modifying base in place."""
     for key, value in override.items():
         if key in base and isinstance(base[key], dict) and isinstance(value, dict):
-            _deep_merge(base[key], value)
+            _deep_merge(base[key], value)  # type: ignore[arg-type]
         else:
             base[key] = value

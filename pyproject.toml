@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "testwise"
+name = "testwise-ai"
 version = "0.1.0"
 description = "LLM-powered test selection for CI/CD pipelines"
 readme = "README.md"
@@ -39,6 +39,7 @@ dev = [
     "pytest-cov",
     "ruff",
     "mypy",
+    "types-PyYAML",
 ]
 
 [project.scripts]

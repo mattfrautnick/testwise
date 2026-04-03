@@ -112,8 +112,16 @@ def _get_tracked_files(repo_root: Path) -> list[str]:
 def _walk_files(repo_root: Path) -> list[str]:
     """Fallback: walk the filesystem (respects common ignore patterns)."""
     ignore_dirs = {
-        ".git", "node_modules", "__pycache__", ".tox", ".venv",
-        "venv", ".mypy_cache", ".pytest_cache", "dist", "build",
+        ".git",
+        "node_modules",
+        "__pycache__",
+        ".tox",
+        ".venv",
+        "venv",
+        ".mypy_cache",
+        ".pytest_cache",
+        "dist",
+        "build",
     }
     files = []
     for path in repo_root.rglob("*"):

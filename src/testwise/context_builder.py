@@ -131,7 +131,9 @@ def _build_test_inventory(
 def _build_diff_section(diff: DiffResult) -> str:
     """Build the diff section of the context."""
     lines = [f"Base: {diff.base_ref} -> Head: {diff.head_ref}"]
-    lines.append(f"Total: +{diff.total_additions}/-{diff.total_deletions} across {len(diff.files)} files\n")
+    lines.append(
+        f"Total: +{diff.total_additions}/-{diff.total_deletions} across {len(diff.files)} files\n"
+    )
 
     for f in diff.files:
         lines.append(f"### {f.path} ({f.status}, +{f.additions}/-{f.deletions})")

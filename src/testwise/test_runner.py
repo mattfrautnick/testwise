@@ -58,8 +58,9 @@ def run_selected_tests(
             selected_ids.add(sel.test_id)
         elif sel.granularity == "file":
             # File-level selection — include all tests in the file
-            pf = file_map.get(sel.test_id)
-            if pf:
+            matched_pf = file_map.get(sel.test_id)
+            if matched_pf:
+                pf = matched_pf
                 runner = _find_runner_for_file(pf.file_path, runners)
                 if runner:
                     for test in pf.tests:
