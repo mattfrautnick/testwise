@@ -7,8 +7,8 @@
   </p>
   <p align="center">
     <a href="https://github.com/mattfrautnick/testwise/actions/workflows/ci.yml"><img src="https://github.com/mattfrautnick/testwise/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-    <a href="https://pypi.org/project/testwise/"><img src="https://img.shields.io/pypi/v/testwise.svg" alt="PyPI"></a>
-    <a href="https://pypi.org/project/testwise/"><img src="https://img.shields.io/pypi/pyversions/testwise.svg" alt="Python"></a>
+    <a href="https://pypi.org/project/smartselect/"><img src="https://img.shields.io/pypi/v/smartselect.svg" alt="PyPI"></a>
+    <a href="https://pypi.org/project/smartselect/"><img src="https://img.shields.io/pypi/pyversions/smartselect.svg" alt="Python"></a>
     <a href="https://github.com/mattfrautnick/testwise/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mattfrautnick/testwise" alt="License"></a>
   </p>
 </p>
