@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "testwise-ai"
-version = "0.1.0"
+version = "0.1.1"
 description = "LLM-powered test selection for CI/CD pipelines"
 readme = "README.md"
 license = "MIT"
