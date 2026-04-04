@@ -48,7 +48,7 @@ from testwise.test_runner import run_selected_tests
     help="Minimum classification to execute",
 )
 @click.option("--verbose", "-v", is_flag=True, help="Verbose logging")
-@click.version_option(package_name="testwise-ai")
+@click.version_option(package_name="testwiseai")
 def main(
     config_path: Path | None,
     base_ref: str | None,

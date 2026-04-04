@@ -46,7 +46,7 @@ git diff ─> Discover Tests ─> Parse with Plugins ─> LLM Classifies ─> Ru
 ### Install
 
 ```bash
-pip install testwise-ai
+pip install testwiseai
 ```
 
 ### Configure

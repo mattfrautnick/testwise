@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "testwise-ai"
+name = "testwiseai"
 version = "0.1.1"
 description = "LLM-powered test selection for CI/CD pipelines"
 readme = "README.md"
