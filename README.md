@@ -46,7 +46,7 @@ git diff ─> Discover Tests ─> Parse with Plugins ─> LLM Classifies ─> Ru
 ### Install
 
 ```bash
-pip install testwiseai
+pip install smartselect
 ```
 
 ### Configure
